@@ -72,8 +72,9 @@ async def regular_play(message: types.Message, state: FSMContext):
             copy_list_for_game.remove(city_from_user)
             used_city.append(city_from_user)
             city_from_bot = [city for city in copy_list_for_game if city.startswith(city_from_user[-1].upper())]
+
             if city_from_bot:
-                bot_choice = random.choice(all_city)
+                bot_choice = city_from_bot[0]
                 await message.answer(f"Мой город - {bot_choice}. Введи город на букву {bot_choice[-1]}", reply_markup= await game_key_word(bot_choice))
                 copy_list_for_game.remove(bot_choice)
                 used_city.append(bot_choice)
@@ -82,13 +83,3 @@ async def regular_play(message: types.Message, state: FSMContext):
     else:
         await message.answer('''Город уже был использован или ты должен ввести город на последнюю букву предыдущего города
 Напиши команду /start если попал в тупик!''')
-
-
-
-
-
-
-
-
-
-
